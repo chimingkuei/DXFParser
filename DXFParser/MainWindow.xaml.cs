@@ -29,6 +29,7 @@ using System.Windows.Shapes;
 using static netDxf.Entities.HatchBoundaryPath;
 using static System.Net.Mime.MediaTypeNames;
 using static DXFParser.BaseLogRecord;
+using Microsoft.Win32;
 
 
 namespace DXFParser
@@ -36,10 +37,10 @@ namespace DXFParser
     #region Config Class
     public class SerialNumber
     {
-        [JsonProperty("Parameter1_val")]
-        public string Parameter1_val { get; set; }
-        [JsonProperty("Parameter2_val")]
-        public string Parameter2_val { get; set; }
+        [JsonProperty("Open_Writing_DXF_Path_val")]
+        public string Open_Writing_DXF_Path_val { get; set; }
+        [JsonProperty("Open_Reading_DXF_Path_val")]
+        public string Open_Reading_DXF_Path_val { get; set; }
     }
 
     public class Model
@@ -81,8 +82,8 @@ namespace DXFParser
         {
             SerialNumber serialnumber_ = new SerialNumber
             {
-                Parameter1_val = Parameter1.Text,
-                Parameter2_val = Parameter2.Text
+                Open_Writing_DXF_Path_val = Open_Writing_DXF_Path.Text,
+                Open_Reading_DXF_Path_val = Open_Reading_DXF_Path.Text
             };
             return serialnumber_;
         }
@@ -92,8 +93,8 @@ namespace DXFParser
             List<RootObject> Parameter_info = Config.Load(encryption);
             if (Parameter_info != null)
             {
-                Parameter1.Text = Parameter_info[model].Models[serialnumber].SerialNumbers.Parameter1_val;
-                Parameter2.Text = Parameter_info[model].Models[serialnumber].SerialNumbers.Parameter2_val;
+                Open_Writing_DXF_Path.Text = Parameter_info[model].Models[serialnumber].SerialNumbers.Open_Writing_DXF_Path_val;
+                Open_Reading_DXF_Path.Text = Parameter_info[model].Models[serialnumber].SerialNumbers.Open_Reading_DXF_Path_val;
             }
             else
             {
@@ -118,6 +119,18 @@ namespace DXFParser
             Config.Save(model, serialnumber, SerialNumberClass(), encryption);
         }
         #endregion
+
+        private void OpenDXFFile(TextBox name)
+        {
+            OpenFileDialog dxf_file = new OpenFileDialog();
+            dxf_file.Title = "Choose DXF File";
+            dxf_file.Filter = "DXF files (*.dxf)|*.dxf|All files (*.*)|*.*";
+            Nullable<bool> result = dxf_file.ShowDialog();
+            if (result == true)
+            {
+                name.Text = dxf_file.FileName;
+            }
+        }
         #endregion
 
         #region Parameter and Init
@@ -138,9 +151,18 @@ namespace DXFParser
         {
             switch ((sender as Button).Name)
             {
+                case nameof(Open_Reading_DXF):
+                    {
+                        OpenDXFFile(Open_Reading_DXF_Path);
+                        break;
+                    }
+                case nameof(Open_Writing_DXF):
+                    {
+                        OpenDXFFile(Open_Writing_DXF_Path);
+                        break;
+                    }
                 case nameof(Write_DXF):
                     {
-                        string file = @"2012 HOLD框(C#畫).dxf";
                         DxfDocument doc = new DxfDocument();
                         WD.CreateLine(doc, new Vector2(2242, 2627), new Vector2(2244, 2629));
                         WD.CreateLine(doc, new Vector2(2360, 2629), new Vector2(2362, 2627));
@@ -12900,10 +12922,10 @@ namespace DXFParser
                                                 };
                                                 WD.CreatePolyline2D(doc, points980);
                         #endregion
-                        doc.Save(file);
+                        doc.Save(Open_Writing_DXF_Path.Text);
                         break;
                     }
-                 case nameof(Read_DXF):
+                case nameof(Read_DXF):
                     {
                         DxfDocument dxf = DxfDocument.Load(@"2012 HOLD框.dxf");
                         //// 讀取Line info
@@ -12956,6 +12978,11 @@ namespace DXFParser
                             }
                         }
                         Console.WriteLine("文本已寫入到文件：" + filePath);
+                        break;
+                    }
+                case nameof(Save_Config):
+                    {
+                        SaveConfig(0, 0);
                         break;
                     }
 

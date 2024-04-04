@@ -4,16 +4,16 @@
 exe
 C#
 .cs
-E:\Temp\DXFParser\DXFParser\obj\x64\Debug\
+D:\Chimingkuei\repos\DXFParser\DXFParser\obj\x64\Debug\
 DXFParser
 none
 false
 DEBUG;TRACE
-E:\Temp\DXFParser\DXFParser\App.xaml
+D:\Chimingkuei\repos\DXFParser\DXFParser\App.xaml
 995768037
-41699286517
+42092181513
 8-1246693019
-32-680709395
+32-1873232852
 MainWindow.xaml;UI\ButtonStyles.xaml;UI\CheckBoxStyles.xaml;UI\ComboBoxStyles.xaml;UI\GroupBoxStyles.xaml;UI\RadioButtonStyles.xaml;UI\SliderStyles.xaml;UI\TabControlStyles.xaml;UI\TextBoxStyles.xaml;
 
 False
