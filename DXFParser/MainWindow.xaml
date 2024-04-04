@@ -39,23 +39,23 @@
         <TabControl HorizontalAlignment="Left" Margin="5,3,0,0" VerticalAlignment="Top" Height="478" Width="978" Background="#FFE6F0FF">
             <TabItem Header="主畫面" Style="{StaticResource BaseTabcontrol}">
                 <Grid>
-                    <Button x:Name="Write_DXF" Style="{StaticResource BaseButton}" Margin="145,286,685,103" Content="Write DXF" FontSize="18" Click="Main_Btn_Click"/>
-                    <Button x:Name="Read_DXF" Style="{StaticResource BaseButton}" Margin="397,287,433,103" Content="Read DXF" FontSize="18" Click="Main_Btn_Click"/>
-                    <Button x:Name="Open_Writing_DXF" Style="{StaticResource BaseButton}" Margin="62,129,828,239" FontSize="18"  Background="#FFE6F0FF" BorderThickness="0" Click="Main_Btn_Click">
+                    <Button x:Name="Write_DXF" Style="{StaticResource BaseButton}" Margin="159,300,671,88" Content="Write DXF" FontSize="18" Click="Main_Btn_Click"/>
+                    <Button x:Name="Read_DXF" Style="{StaticResource BaseButton}" Margin="408,302,422,88" Content="Read DXF" FontSize="18" Click="Main_Btn_Click"/>
+                    <Button x:Name="Open_Writing_DXF" Style="{StaticResource BaseButton}" Margin="160,172,730,195" FontSize="18"  Background="#FFE6F0FF" BorderThickness="0" Click="Main_Btn_Click">
                         <Button.ToolTip>
                             <TextBlock FontSize="14">Open Writing DXF Path</TextBlock>
                         </Button.ToolTip>
                         <Image x:Name="Open_Writing_Dxf_Icon" Source="/Icon/DXF.png" Width="82" Height="76"/>
                     </Button>
-                    <TextBox x:Name="Open_Writing_DXF_Path" Style="{StaticResource BaseTextBox}" Tag="請輸入寫入DXF檔路徑!" Margin="167,148,334,258"/>
-                    <Button x:Name="Open_Reading_DXF" Style="{StaticResource BaseButton}" Margin="62,34,828,333" FontSize="18"  Background="#FFE6F0FF" BorderThickness="0" Click="Main_Btn_Click">
+                    <TextBox x:Name="Open_Writing_DXF_Path" Style="{StaticResource BaseTextBox}" Tag="請輸入寫入DXF檔路徑!" Margin="290,194,211,212"/>
+                    <Button x:Name="Open_Reading_DXF" Style="{StaticResource BaseButton}" Margin="155,73,735,294" FontSize="18"  Background="#FFE6F0FF" BorderThickness="0" Click="Main_Btn_Click">
                         <Button.ToolTip>
                             <TextBlock FontSize="14">Open Reading DXF Path</TextBlock>
                         </Button.ToolTip>
                         <Image x:Name="Open_Reading_DXF_Icon" Source="/Icon/DXF Version2.png" Width="82" Height="76"/>
                     </Button>
-                    <TextBox x:Name="Open_Reading_DXF_Path" Style="{StaticResource BaseTextBox}" Tag="請輸入讀取DXF檔路徑!" Margin="163,55,338,351"/>
-                    <Button x:Name="Save_Config" Style="{StaticResource BaseButton}" Margin="623,288,207,102" Content="Save Config" FontSize="18" Click="Main_Btn_Click"/>
+                    <TextBox x:Name="Open_Reading_DXF_Path" Style="{StaticResource BaseTextBox}" Tag="請輸入讀取DXF檔路徑!" Margin="288,96,213,309"/>
+                    <Button x:Name="Save_Config" Style="{StaticResource BaseButton}" Margin="654,300,176,90" Content="Save Config" FontSize="18" Click="Main_Btn_Click"/>
                 </Grid>
             </TabItem>
             <TabItem Header="參數畫面" Style="{StaticResource BaseTabcontrol}">
