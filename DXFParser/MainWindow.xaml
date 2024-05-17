@@ -39,8 +39,8 @@
         <TabControl HorizontalAlignment="Left" Margin="5,3,0,0" VerticalAlignment="Top" Height="478" Width="978" Background="#FFE6F0FF">
             <TabItem Header="主畫面" Style="{StaticResource BaseTabcontrol}">
                 <Grid>
-                    <Button x:Name="Write_DXF" Style="{StaticResource BaseButton}" Margin="113,258,717,129" Content="Write DXF" FontSize="18" Click="Main_Btn_Click"/>
-                    <Button x:Name="Read_DXF" Style="{StaticResource BaseButton}" Margin="302,260,528,129" Content="Read DXF" FontSize="18" Click="Main_Btn_Click"/>
+                    <Button x:Name="Write_DXF" Style="{StaticResource BaseButton}" Margin="39,256,791,130" Content="Write DXF" FontSize="18" Click="Main_Btn_Click"/>
+                    <Button x:Name="Read_DXF" Style="{StaticResource BaseButton}" Margin="206,258,624,130" Content="Read DXF" FontSize="18" Click="Main_Btn_Click"/>
                     <Button x:Name="Open_Writing_DXF" Style="{StaticResource BaseButton}" Margin="38,171,852,196" FontSize="18"  Background="#FFE6F0FF" BorderThickness="0" Click="Main_Btn_Click">
                         <Button.ToolTip>
                             <TextBlock FontSize="14">Open Writing DXF Path</TextBlock>
@@ -55,12 +55,14 @@
                         <Image x:Name="Open_Reading_DXF_Icon" Source="/Icon/DXF Version2.png" Width="82" Height="76"/>
                     </Button>
                     <TextBox x:Name="Open_Reading_DXF_Path" Style="{StaticResource BaseTextBox}" Tag="請輸入讀取DXF檔路徑!" Margin="131,93,464,312"/>
-                    <Button x:Name="Save_Config" Style="{StaticResource BaseButton}" Margin="203,342,627,48" Content="Save Config" FontSize="18" Click="Main_Btn_Click"/>
-                    <ListView Name="myListView" Margin="516,18,10,10" MouseLeftButtonUp="ListView_MouseLeftButtonUp">
+                    <Button x:Name="Save_Config" Style="{StaticResource BaseButton}" Margin="40,344,790,46" Content="Save Config" FontSize="18" Click="Main_Btn_Click"/>
+                    <Button x:Name="Clear_ListView" Style="{StaticResource BaseButton}" Margin="214,343,616,47" Content="Clear ListView" FontSize="18" Click="Main_Btn_Click"/>
+                    <ListView Name="DXFListView" Margin="516,18,10,10" MouseLeftButtonUp="DXFListView_MouseLeftButtonUp">
                         <ListView.View>
                             <GridView>
-                                <GridViewColumn Header="Circle Center" DisplayMemberBinding="{Binding Circle_Center}" Width="200"/>
-                                <GridViewColumn Header="Radius" DisplayMemberBinding="{Binding Radius}" Width="150"/>
+                                <GridViewColumn x:Name="item1" DisplayMemberBinding="{Binding item1}" Width="200"/>
+                                <GridViewColumn x:Name="item2" DisplayMemberBinding="{Binding item2}" Width="150"/>
+                                <GridViewColumn x:Name="item3" DisplayMemberBinding="{Binding item3}" Width="150"/>
                             </GridView>
                         </ListView.View>
                     </ListView>

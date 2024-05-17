@@ -37,8 +37,9 @@ namespace DXFParser
 {
     public class DXFStructure
     {
-        public Vector3 Circle_Center { get; set; }
-        public double Radius { get; set; }
+        public Vector3 item1 { get; set; }
+        public double item2 { get; set; }
+        public Vector3 item3 { get; set; }
     }
 
     #region Config Class
@@ -22693,17 +22694,8 @@ namespace DXFParser
                     }
                 case nameof(Read_DXF):
                     {
-                        //DxfDocument dxf = DxfDocument.Load(Open_Reading_DXF_Path.Text);
-                        // 讀取Line info
-                        //foreach (var item in dxf.Entities.Lines)
-                        //{
-                        //    Console.WriteLine($"Start:{item.StartPoint}, End:{item.EndPoint}");
-                        //}
-                        //讀取Circle info
-                        //foreach (var item in dxf.Entities.Circles)
-                        //{
-                        //    Console.WriteLine($"Center:{item.Center}, Radius:{item.Radius}");
-                        //}
+                        DxfDocument dxf = DxfDocument.Load(Open_Reading_DXF_Path.Text);
+                        #region
                         //// 讀取文字 info
                         //foreach (var item in dxf.Entities.Texts)
                         //{
@@ -22755,22 +22747,35 @@ namespace DXFParser
                         //    num += 1;
                         //}
                         //Console.WriteLine(num);
+                        #endregion
                         structure = new ObservableCollection<DXFStructure>();
-                        structure.Add(new DXFStructure { Circle_Center = new Vector3(20, 20, 0), Radius = 15.0 });
-                        structure.Add(new DXFStructure { Circle_Center = new Vector3(30, 30, 0), Radius = 20.0 });
-                        //structure = new ObservableCollection<DXFStructure>
+                        item1.Header = "Center of Circle";
+                        item2.Header = "Radius";
+                        item3.Width = 0;
+                        foreach (var item in dxf.Entities.Circles)
+                        {
+                            //structure.Add(new DXFStructure { Circle_Center = new Vector3(20, 20, 0), Radius = 15.0 });
+                            structure.Add(new DXFStructure { item1 = item.Center, item2 = item.Radius });
+                        }
+                        //item1.Header = "StartPoint";
+                        //item3.Header = "EndPoint";
+                        //item2.Width = 0;
+                        //foreach (var item in dxf.Entities.Lines)
                         //{
-                        //    new DXFStructure { Circle_Center =  new Vector3(10,10, 0), Radius = 10.0}
-                        //};
-                        // 将数据设置到 ListView 的 ItemSource 属性中
-                        myListView.ItemsSource = structure;
+                        //    structure.Add(new DXFStructure { item1 = item.StartPoint, item3 = item.EndPoint });
+                        //}
+                        DXFListView.ItemsSource = structure;
                         DataContext = this;
+                        break;
+                    }
+                case nameof(Clear_ListView):
+                    {
+                        DXFListView.ItemsSource = null;
                         break;
                     }
                 case nameof(Save_Config):
                     {
-                        //SaveConfig(0, 0);
-                        myListView.ItemsSource = null;
+                        SaveConfig(0, 0);
                         break;
                     }
 
@@ -22778,13 +22783,13 @@ namespace DXFParser
         }
         #endregion
 
-        private void ListView_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        private void DXFListView_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             ListView listView = (ListView)sender;
             DXFStructure selectedPerson = (DXFStructure)listView.SelectedItem;
             if (selectedPerson != null)
             {
-                Console.WriteLine("Selected Person: Circle_Center={0}, Radius={1}", selectedPerson.Circle_Center, selectedPerson.Radius);
+                Console.WriteLine("Selected item: item1={0}, item2={1}, item3={2}", selectedPerson.item1, selectedPerson.item2, selectedPerson.item3);
             }
         }
 
