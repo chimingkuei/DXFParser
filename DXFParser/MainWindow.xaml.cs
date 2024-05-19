@@ -35,13 +35,16 @@ using System.Collections.ObjectModel;
 
 namespace DXFParser
 {
-    public class DXFStructure
+    public class CircleStruct
     {
-        public Vector3 item1 { get; set; }
-        public double item2 { get; set; }
-        public Vector3 item3 { get; set; }
+        public Vector3 center { get; set; }
+        public double radius { get; set; }
     }
-
+    public class LineStruct
+    {
+        public Vector3 startpoint { get; set; }
+        public Vector3 endpoint { get; set; }
+    }
     #region Config Class
     public class SerialNumber
     {
@@ -139,6 +142,14 @@ namespace DXFParser
                 name.Text = dxf_file.FileName;
             }
         }
+
+        private void ListViewClearWidth()
+        {
+            Circle_Item1.Width = 0;
+            Circle_Item2.Width = 0;
+            Line_Item1.Width = 0;
+            Line_Item2.Width = 0;
+        }
         #endregion
 
         #region Parameter and Init
@@ -152,7 +163,8 @@ namespace DXFParser
         BaseLogRecord Logger = new BaseLogRecord();
         //Logger.WriteLog("儲存參數!", LogLevel.General, richTextBoxGeneral);
         #endregion
-        public ObservableCollection<DXFStructure> structure { get; set; }
+        public ObservableCollection<CircleStruct> circle { get; set; }
+        public ObservableCollection<LineStruct> line { get; set; }
         #endregion
 
         #region Main Screen
@@ -22748,23 +22760,35 @@ namespace DXFParser
                         //}
                         //Console.WriteLine(num);
                         #endregion
-                        structure = new ObservableCollection<DXFStructure>();
-                        item1.Header = "Center of Circle";
-                        item2.Header = "Radius";
-                        item3.Width = 0;
-                        foreach (var item in dxf.Entities.Circles)
+                        if ((bool)Circle.IsChecked)
                         {
-                            //structure.Add(new DXFStructure { Circle_Center = new Vector3(20, 20, 0), Radius = 15.0 });
-                            structure.Add(new DXFStructure { item1 = item.Center, item2 = item.Radius });
+                            circle = new ObservableCollection<CircleStruct>();
+                            ListViewClearWidth();
+                            Circle_Item1.Header = "Center of Circle";
+                            Circle_Item2.Header = "Radius";
+                            Circle_Item1.Width = 300;
+                            Circle_Item2.Width = 250;
+                            foreach (var item in dxf.Entities.Circles)
+                            {
+                                //circle.Add(new CircleStruct { center = new Vector3(20, 20, 0), radius = 15.0 });
+                                circle.Add(new CircleStruct { center = item.Center, radius = item.Radius });
+                            }
+                            DXFListView.ItemsSource = circle;
                         }
-                        //item1.Header = "StartPoint";
-                        //item3.Header = "EndPoint";
-                        //item2.Width = 0;
-                        //foreach (var item in dxf.Entities.Lines)
-                        //{
-                        //    structure.Add(new DXFStructure { item1 = item.StartPoint, item3 = item.EndPoint });
-                        //}
-                        DXFListView.ItemsSource = structure;
+                        else if ((bool)Line.IsChecked)
+                        {
+                            line = new ObservableCollection<LineStruct>();
+                            ListViewClearWidth();
+                            Line_Item1.Header = "StartPoint";
+                            Line_Item2.Header = "EndPoint";
+                            Line_Item1.Width = 250;
+                            Line_Item2.Width = 250;
+                            foreach (var item in dxf.Entities.Lines)
+                            {
+                                line.Add(new LineStruct { startpoint = item.StartPoint, endpoint = item.EndPoint });
+                            }
+                            DXFListView.ItemsSource = line;
+                        }
                         DataContext = this;
                         break;
                     }
@@ -22786,11 +22810,23 @@ namespace DXFParser
         private void DXFListView_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             ListView listView = (ListView)sender;
-            DXFStructure selectedPerson = (DXFStructure)listView.SelectedItem;
-            if (selectedPerson != null)
+            if ((bool)Circle.IsChecked)
             {
-                Console.WriteLine("Selected item: item1={0}, item2={1}, item3={2}", selectedPerson.item1, selectedPerson.item2, selectedPerson.item3);
+                CircleStruct selectedPerson = (CircleStruct)listView.SelectedItem;
+                if (selectedPerson != null)
+                {
+                    Console.WriteLine("Selected item: Center of Circle = {0}, Radius = {1}", selectedPerson.center, selectedPerson.radius);
+                }
             }
+            else if ((bool)Line.IsChecked)
+            {
+                LineStruct selectedPerson = (LineStruct)listView.SelectedItem;
+                if (selectedPerson != null)
+                {
+                    Console.WriteLine("Selected item: Startpoint = {0}, Endpoint = {1}", selectedPerson.startpoint, selectedPerson.endpoint);
+                }
+            }
+            
         }
 
     }

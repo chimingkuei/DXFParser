@@ -41,6 +41,9 @@
                 <Grid>
                     <Button x:Name="Write_DXF" Style="{StaticResource BaseButton}" Margin="39,256,791,130" Content="Write DXF" FontSize="18" Click="Main_Btn_Click"/>
                     <Button x:Name="Read_DXF" Style="{StaticResource BaseButton}" Margin="206,258,624,130" Content="Read DXF" FontSize="18" Click="Main_Btn_Click"/>
+                    <RadioButton x:Name="Circle" Style="{StaticResource BaseRadioButton}" Margin="380,256,523,153" Content="Circle" FontSize="18"/>
+                    <RadioButton x:Name="Line" Style="{StaticResource BaseRadioButton}" Margin="380,298,523,111" Content="Line" FontSize="18"/>
+                    <RadioButton x:Name="Polylines2D" Style="{StaticResource BaseRadioButton}" Margin="378,338,469,71" Content="Polylines2D" FontSize="18"/>
                     <Button x:Name="Open_Writing_DXF" Style="{StaticResource BaseButton}" Margin="38,171,852,196" FontSize="18"  Background="#FFE6F0FF" BorderThickness="0" Click="Main_Btn_Click">
                         <Button.ToolTip>
                             <TextBlock FontSize="14">Open Writing DXF Path</TextBlock>
@@ -60,9 +63,10 @@
                     <ListView Name="DXFListView" Margin="516,18,10,10" MouseLeftButtonUp="DXFListView_MouseLeftButtonUp">
                         <ListView.View>
                             <GridView>
-                                <GridViewColumn x:Name="item1" DisplayMemberBinding="{Binding item1}" Width="200"/>
-                                <GridViewColumn x:Name="item2" DisplayMemberBinding="{Binding item2}" Width="150"/>
-                                <GridViewColumn x:Name="item3" DisplayMemberBinding="{Binding item3}" Width="150"/>
+                                <GridViewColumn x:Name="Circle_Item1" DisplayMemberBinding="{Binding center}"/>
+                                <GridViewColumn x:Name="Circle_Item2" DisplayMemberBinding="{Binding radius}"/>
+                                <GridViewColumn x:Name="Line_Item1" DisplayMemberBinding="{Binding startpoint}"/>
+                                <GridViewColumn x:Name="Line_Item2" DisplayMemberBinding="{Binding endpoint}"/>
                             </GridView>
                         </ListView.View>
                     </ListView>
