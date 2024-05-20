@@ -39,43 +39,45 @@
         <TabControl HorizontalAlignment="Left" Margin="5,3,0,0" VerticalAlignment="Top" Height="478" Width="978" Background="#FFE6F0FF">
             <TabItem Header="主畫面" Style="{StaticResource BaseTabcontrol}">
                 <Grid>
-                    <Button x:Name="Write_DXF" Style="{StaticResource BaseButton}" Margin="39,256,791,130" Content="Write DXF" FontSize="18" Click="Main_Btn_Click"/>
-                    <Button x:Name="Read_DXF" Style="{StaticResource BaseButton}" Margin="206,258,624,130" Content="Read DXF" FontSize="18" Click="Main_Btn_Click"/>
-                    <RadioButton x:Name="Circle" Style="{StaticResource BaseRadioButton}" Margin="380,256,523,153" Content="Circle" FontSize="18"/>
-                    <RadioButton x:Name="Line" Style="{StaticResource BaseRadioButton}" Margin="380,298,523,111" Content="Line" FontSize="18"/>
-                    <RadioButton x:Name="Polylines2D" Style="{StaticResource BaseRadioButton}" Margin="378,338,469,71" Content="Polylines2D" FontSize="18"/>
-                    <Button x:Name="Open_Writing_DXF" Style="{StaticResource BaseButton}" Margin="38,171,852,196" FontSize="18"  Background="#FFE6F0FF" BorderThickness="0" Click="Main_Btn_Click">
-                        <Button.ToolTip>
-                            <TextBlock FontSize="14">Open Writing DXF Path</TextBlock>
-                        </Button.ToolTip>
-                        <Image x:Name="Open_Writing_Dxf_Icon" Source="/Icon/DXF.png" Width="82" Height="76"/>
-                    </Button>
-                    <TextBox x:Name="Open_Writing_DXF_Path" Style="{StaticResource BaseTextBox}" Tag="請輸入寫入DXF檔路徑!" Margin="127,189,468,217"/>
-                    <Button x:Name="Open_Reading_DXF" Style="{StaticResource BaseButton}" Margin="37,71,853,295" FontSize="18"  Background="#FFE6F0FF" BorderThickness="0" Click="Main_Btn_Click">
-                        <Button.ToolTip>
-                            <TextBlock FontSize="14">Open Reading DXF Path</TextBlock>
-                        </Button.ToolTip>
-                        <Image x:Name="Open_Reading_DXF_Icon" Source="/Icon/DXF Version2.png" Width="82" Height="76"/>
-                    </Button>
-                    <TextBox x:Name="Open_Reading_DXF_Path" Style="{StaticResource BaseTextBox}" Tag="請輸入讀取DXF檔路徑!" Margin="131,93,464,312"/>
-                    <Button x:Name="Save_Config" Style="{StaticResource BaseButton}" Margin="40,344,790,46" Content="Save Config" FontSize="18" Click="Main_Btn_Click"/>
-                    <Button x:Name="Clear_ListView" Style="{StaticResource BaseButton}" Margin="214,343,616,47" Content="Clear ListView" FontSize="18" Click="Main_Btn_Click"/>
-                    <ListView Name="DXFListView" Margin="516,18,10,10" MouseLeftButtonUp="DXFListView_MouseLeftButtonUp">
+                    <ListView Name="DXFListView" Margin="8,14,220,12" MouseLeftButtonUp="DXFListView_MouseLeftButtonUp">
                         <ListView.View>
                             <GridView>
                                 <GridViewColumn x:Name="Circle_Item1" DisplayMemberBinding="{Binding center}"/>
                                 <GridViewColumn x:Name="Circle_Item2" DisplayMemberBinding="{Binding radius}"/>
                                 <GridViewColumn x:Name="Line_Item1" DisplayMemberBinding="{Binding startpoint}"/>
                                 <GridViewColumn x:Name="Line_Item2" DisplayMemberBinding="{Binding endpoint}"/>
+                                <GridViewColumn x:Name="Polylines2D_Item1" DisplayMemberBinding="{Binding posX}"/>
+                                <GridViewColumn x:Name="Polylines2D_Item2" DisplayMemberBinding="{Binding posY}"/>
                             </GridView>
                         </ListView.View>
                     </ListView>
+                    <WrapPanel Orientation="Vertical" Margin="758,8,6,11">
+                        <Button x:Name="Write_DXF" Style="{StaticResource BaseButton}" Margin="44,118.5,0,0" Content="Write DXF" Background="#FF3E6FB3" FontSize="18" Width="120" Height="50" Click="Main_Btn_Click"/>
+                        <Button x:Name="Read_DXF" Style="{StaticResource BaseButton}" Margin="44,20,0,0" Content="Read DXF" Background="#FF3E6FB3" FontSize="18" Width="120" Height="50" Click="Main_Btn_Click"/>
+                        <Button x:Name="Clear_ListView" Style="{StaticResource BaseButton}" Margin="44,20,0,0" Content="Clear ListView" Background="#FF3E6FB3" FontSize="18" Width="120" Height="50" Click="Main_Btn_Click"/>
+                    </WrapPanel>
                 </Grid>
             </TabItem>
             <TabItem Header="參數畫面" Style="{StaticResource BaseTabcontrol}">
                 <Grid>
-                    
-
+                    <Button x:Name="Open_Writing_DXF" Style="{StaticResource BaseButton}" Margin="38,171,852,196" FontSize="18"  Background="#FFE6F0FF" BorderThickness="0" Click="Parameter_Btn_Click">
+                        <Button.ToolTip>
+                            <TextBlock FontSize="14">Open Writing DXF Path</TextBlock>
+                        </Button.ToolTip>
+                        <Image x:Name="Open_Writing_Dxf_Icon" Source="/Icon/DXF.png" Width="82" Height="76"/>
+                    </Button>
+                    <TextBox x:Name="Open_Writing_DXF_Path" Style="{StaticResource BaseTextBox}" Tag="請輸入寫入DXF檔路徑!" Margin="127,189,468,217"/>
+                    <Button x:Name="Open_Reading_DXF" Style="{StaticResource BaseButton}" Margin="37,71,853,295" FontSize="18"  Background="#FFE6F0FF" BorderThickness="0" Click="Parameter_Btn_Click">
+                        <Button.ToolTip>
+                            <TextBlock FontSize="14">Open Reading DXF Path</TextBlock>
+                        </Button.ToolTip>
+                        <Image x:Name="Open_Reading_DXF_Icon" Source="/Icon/DXF Version2.png" Width="82" Height="76"/>
+                    </Button>
+                    <TextBox x:Name="Open_Reading_DXF_Path" Style="{StaticResource BaseTextBox}" Tag="請輸入讀取DXF檔路徑!" Margin="131,93,464,312"/>
+                    <RadioButton x:Name="Circle" Style="{StaticResource BaseRadioButton}" Margin="542,103,361,306" Content="Circle" FontSize="18"/>
+                    <RadioButton x:Name="Line" Style="{StaticResource BaseRadioButton}" Margin="550,151,353,258" Content="Line" FontSize="18"/>
+                    <RadioButton x:Name="Polylines2D" Style="{StaticResource BaseRadioButton}" Margin="545,196,302,213" Content="Polylines2D" FontSize="18"/>
+                    <Button x:Name="Save_Config" Style="{StaticResource BaseButton}" Margin="142,322,688,68" Content="Save Config" FontSize="18" Click="Parameter_Btn_Click"/>
                 </Grid>
             </TabItem>
         </TabControl>

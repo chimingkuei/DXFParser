@@ -31,10 +31,12 @@ using static System.Net.Mime.MediaTypeNames;
 using static DXFParser.BaseLogRecord;
 using Microsoft.Win32;
 using System.Collections.ObjectModel;
+using Xceed.Wpf.Toolkit.PropertyGrid.Attributes;
 
 
 namespace DXFParser
 {
+    #region DXF Data Struct Class
     public class CircleStruct
     {
         public Vector3 center { get; set; }
@@ -45,6 +47,13 @@ namespace DXFParser
         public Vector3 startpoint { get; set; }
         public Vector3 endpoint { get; set; }
     }
+    public class Polylines2DStruct
+    {
+        public double posX { get; set; }
+        public double posY { get; set; }
+    }
+    #endregion
+
     #region Config Class
     public class SerialNumber
     {
@@ -149,6 +158,8 @@ namespace DXFParser
             Circle_Item2.Width = 0;
             Line_Item1.Width = 0;
             Line_Item2.Width = 0;
+            Polylines2D_Item1.Width = 0;
+            Polylines2D_Item2.Width = 0;
         }
         #endregion
 
@@ -158,13 +169,11 @@ namespace DXFParser
             LoadConfig(0, 0);
         }
         BaseConfig<RootObject> Config = new BaseConfig<RootObject>();
-        WriteDXF WD = new WriteDXF();
-        #region Log
         BaseLogRecord Logger = new BaseLogRecord();
-        //Logger.WriteLog("儲存參數!", LogLevel.General, richTextBoxGeneral);
-        #endregion
+        WriteDXF WD = new WriteDXF();
         public ObservableCollection<CircleStruct> circle { get; set; }
         public ObservableCollection<LineStruct> line { get; set; }
+        public ObservableCollection<Polylines2DStruct> polylines2D { get; set; }
         #endregion
 
         #region Main Screen
@@ -172,16 +181,6 @@ namespace DXFParser
         {
             switch ((sender as Button).Name)
             {
-                case nameof(Open_Reading_DXF):
-                    {
-                        OpenDXFFile(Open_Reading_DXF_Path);
-                        break;
-                    }
-                case nameof(Open_Writing_DXF):
-                    {
-                        OpenDXFFile(Open_Writing_DXF_Path);
-                        break;
-                    }
                 case nameof(Write_DXF):
                     {
                         DxfDocument doc = new DxfDocument();
@@ -22708,11 +22707,6 @@ namespace DXFParser
                     {
                         DxfDocument dxf = DxfDocument.Load(Open_Reading_DXF_Path.Text);
                         #region
-                        //// 讀取文字 info
-                        //foreach (var item in dxf.Entities.Texts)
-                        //{
-                        //    Console.WriteLine($"1:{item.Value}");
-                        //}
                         ////讀取Polylines2D info
                         //string filePath = @"output.txt";
                         //using (StreamWriter writer = new StreamWriter(filePath))
@@ -22774,6 +22768,7 @@ namespace DXFParser
                                 circle.Add(new CircleStruct { center = item.Center, radius = item.Radius });
                             }
                             DXFListView.ItemsSource = circle;
+                            Logger.WriteLog("Find DXF Circle data!", LogLevel.General, richTextBoxGeneral);
                         }
                         else if ((bool)Line.IsChecked)
                         {
@@ -22788,6 +22783,25 @@ namespace DXFParser
                                 line.Add(new LineStruct { startpoint = item.StartPoint, endpoint = item.EndPoint });
                             }
                             DXFListView.ItemsSource = line;
+                            Logger.WriteLog("Find DXF Line data!", LogLevel.General, richTextBoxGeneral);
+                        }
+                        else if ((bool)Polylines2D.IsChecked)
+                        {
+                            polylines2D = new ObservableCollection<Polylines2DStruct>();
+                            ListViewClearWidth();
+                            Polylines2D_Item1.Header = "Position X";
+                            Polylines2D_Item2.Header = "Position Y";
+                            Polylines2D_Item1.Width = 250;
+                            Polylines2D_Item2.Width = 250;
+                            foreach (var polyline in dxf.Entities.Polylines2D)
+                            {
+                                foreach (var item in polyline.Vertexes)
+                                {
+                                    polylines2D.Add(new Polylines2DStruct { posX = item.Position.X, posY = item.Position.Y });
+                                }
+                            }
+                            DXFListView.ItemsSource = polylines2D;
+                            Logger.WriteLog("Find DXF Polylines2D data!", LogLevel.General, richTextBoxGeneral);
                         }
                         DataContext = this;
                         break;
@@ -22795,14 +22809,35 @@ namespace DXFParser
                 case nameof(Clear_ListView):
                     {
                         DXFListView.ItemsSource = null;
+                        ListViewClearWidth();
+                        Logger.WriteLog("Clear ListView data!", LogLevel.General, richTextBoxGeneral);
+                        break;
+                    }
+            }
+        }
+        #endregion
+
+        #region Parameter Screen
+        private void Parameter_Btn_Click(object sender, RoutedEventArgs e)
+        {
+            switch ((sender as Button).Name)
+            {
+                case nameof(Open_Reading_DXF):
+                    {
+                        OpenDXFFile(Open_Reading_DXF_Path);
+                        break;
+                    }
+                case nameof(Open_Writing_DXF):
+                    {
+                        OpenDXFFile(Open_Writing_DXF_Path);
                         break;
                     }
                 case nameof(Save_Config):
                     {
                         SaveConfig(0, 0);
+                        Logger.WriteLog("Save Config!", LogLevel.General, richTextBoxGeneral);
                         break;
                     }
-
             }
         }
         #endregion
