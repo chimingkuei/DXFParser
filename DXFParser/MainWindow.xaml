@@ -64,6 +64,7 @@
                     </GroupBox>
                     <Button x:Name="Read_DXF" Style="{StaticResource BaseButton}" Margin="751,238,101,158" Content="Read DXF" Background="#FF3E6FB3" FontSize="18" Width="120" Height="50" Click="RDS_Btn_Click"/>
                     <Button x:Name="Clear_ListView" Style="{StaticResource BaseButton}" Margin="751,314,101,82" Content="Clear ListView" Background="#FF3E6FB3" FontSize="18" Width="120" Height="50" Click="RDS_Btn_Click"/>
+                    <Button x:Name="Test" Style="{StaticResource BaseButton}" Margin="753,373,99,23" Content="Test" Background="#FF3E6FB3" FontSize="18" Width="120" Height="50" Click="RDS_Btn_Click"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Writing DXF Screen" Style="{StaticResource BaseTabcontrol}">

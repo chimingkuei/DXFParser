@@ -2,9 +2,11 @@
 using netDxf.Entities;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 
 namespace DXFParser
 {
@@ -31,9 +33,27 @@ namespace DXFParser
             doc.Entities.Add(entity);
         }
 
+    }
 
-
-
+    class DataTransformer
+    {
+        public void GetListViewHeader(ListView listView)
+        {
+            List<string> headers = new List<string>();
+            if (listView.View is GridView gridView)
+            {
+                foreach (GridViewColumn column in gridView.Columns)
+                {
+                    if (!string.IsNullOrEmpty(column.Header.ToString()))
+                    {
+                        headers.Add(column.Header.ToString());
+                        Console.WriteLine(column.Header.ToString());
+                    }
+                }
+            }
+        }
 
     }
+
+
 }

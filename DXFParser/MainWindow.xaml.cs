@@ -156,10 +156,16 @@ namespace DXFParser
         {
             Circle_Item1.Width = 0;
             Circle_Item2.Width = 0;
+            Circle_Item1.Header = "";
+            Circle_Item2.Header = "";
             Line_Item1.Width = 0;
             Line_Item2.Width = 0;
+            Line_Item1.Header = "";
+            Line_Item2.Header = "";
             Polylines2D_Item1.Width = 0;
             Polylines2D_Item2.Width = 0;
+            Polylines2D_Item1.Header = "";
+            Polylines2D_Item2.Header = "";
         }
         #endregion
 
@@ -171,6 +177,7 @@ namespace DXFParser
         BaseConfig<RootObject> Config = new BaseConfig<RootObject>();
         BaseLogRecord Logger = new BaseLogRecord();
         WriteDXF WD = new WriteDXF();
+        DataTransformer DT = new DataTransformer();
         public ObservableCollection<CircleStruct> circle { get; set; }
         public ObservableCollection<LineStruct> line { get; set; }
         public ObservableCollection<Polylines2DStruct> polylines2D { get; set; }
@@ -294,6 +301,11 @@ namespace DXFParser
                         DXFListView.ItemsSource = null;
                         ListViewClearWidth();
                         Logger.WriteLog("Clear ListView data!", LogLevel.General, richTextBoxGeneral);
+                        break;
+                    }
+                case nameof(Test):
+                    {
+                        DT.GetListViewHeader(DXFListView);
                         break;
                     }
             }
