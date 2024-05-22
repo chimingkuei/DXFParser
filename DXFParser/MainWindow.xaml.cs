@@ -32,6 +32,7 @@ using static DXFParser.BaseLogRecord;
 using Microsoft.Win32;
 using System.Collections.ObjectModel;
 using Xceed.Wpf.Toolkit.PropertyGrid.Attributes;
+using System.Windows.Markup;
 
 
 namespace DXFParser
@@ -305,7 +306,7 @@ namespace DXFParser
                     }
                 case nameof(Test):
                     {
-                        DT.GetListViewHeader(DXFListView);
+                        DT.ExportCsv(DXFListView, @"E:\DIP Temp\Image Temp\1.csv");
                         break;
                     }
             }
