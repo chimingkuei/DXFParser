@@ -42,12 +42,15 @@
                     <ListView Name="DXFListView" Margin="27,16,321,83" MouseLeftButtonUp="DXFListView_MouseLeftButtonUp">
                         <ListView.View>
                             <GridView>
-                                <GridViewColumn x:Name="Circle_Item1" DisplayMemberBinding="{Binding center}"/>
-                                <GridViewColumn x:Name="Circle_Item2" DisplayMemberBinding="{Binding radius}"/>
-                                <GridViewColumn x:Name="Line_Item1" DisplayMemberBinding="{Binding startpoint}"/>
-                                <GridViewColumn x:Name="Line_Item2" DisplayMemberBinding="{Binding endpoint}"/>
-                                <GridViewColumn x:Name="Polylines2D_Item1" DisplayMemberBinding="{Binding posX}"/>
-                                <GridViewColumn x:Name="Polylines2D_Item2" DisplayMemberBinding="{Binding posY}"/>
+                                <GridViewColumn x:Name="Circle_Item1" DisplayMemberBinding="{Binding circle}"/>
+                                <GridViewColumn x:Name="Circle_Item2" DisplayMemberBinding="{Binding center}"/>
+                                <GridViewColumn x:Name="Circle_Item3" DisplayMemberBinding="{Binding radius}"/>
+                                <GridViewColumn x:Name="Line_Item1" DisplayMemberBinding="{Binding line}"/>
+                                <GridViewColumn x:Name="Line_Item2" DisplayMemberBinding="{Binding startpoint}"/>
+                                <GridViewColumn x:Name="Line_Item3" DisplayMemberBinding="{Binding endpoint}"/>
+                                <GridViewColumn x:Name="Polylines2D_Item1" DisplayMemberBinding="{Binding polylines2D}"/>
+                                <GridViewColumn x:Name="Polylines2D_Item2" DisplayMemberBinding="{Binding posX}"/>
+                                <GridViewColumn x:Name="Polylines2D_Item3" DisplayMemberBinding="{Binding posY}"/>
                             </GridView>
                         </ListView.View>
                     </ListView>

@@ -71,23 +71,26 @@ namespace DXFParser
             {
                 if (item is CircleStruct circle)
                 {
-                    string[] content = new string[2];
-                    content[0] = EscapeCsvField(circle.center.ToString());
-                    content[1] = circle.radius.ToString();
+                    string[] content = new string[3];
+                    content[0] = circle.circle.ToString();
+                    content[1] = EscapeCsvField(circle.center.ToString());
+                    content[2] = circle.radius.ToString();
                     data.Add(content);
                 }
                 if (item is LineStruct line)
                 {
-                    string[] content = new string[2];
-                    content[0] = EscapeCsvField(line.startpoint.ToString());
-                    content[1] = EscapeCsvField(line.endpoint.ToString());
+                    string[] content = new string[3];
+                    content[0] = line.line.ToString();
+                    content[1] = EscapeCsvField(line.startpoint.ToString());
+                    content[2] = EscapeCsvField(line.endpoint.ToString());
                     data.Add(content);
                 }
                 if (item is Polylines2DStruct polylines2D)
                 {
-                    string[] content = new string[2];
-                    content[0] = polylines2D.posX.ToString();
-                    content[1] = polylines2D.posY.ToString();
+                    string[] content = new string[3];
+                    content[0] = polylines2D.polylines2D.ToString();
+                    content[1] = polylines2D.posX.ToString();
+                    content[2] = polylines2D.posY.ToString();
                     data.Add(content);
                 }
             }
@@ -104,13 +107,6 @@ namespace DXFParser
                     writer.WriteLine(string.Join(",", row));
                 }
             }
-            //範例:
-            //string[] headers = { "Name", "Age", "City" };
-            //string[][] data = {
-            //new string[] { "Alice", "30", "New York" },
-            //new string[] { "Bob", "25", "Los Angeles" },
-            //new string[] { "Charlie", "35", "Chicago" }
-            //};
         }
 
         

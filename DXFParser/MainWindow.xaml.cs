@@ -40,16 +40,19 @@ namespace DXFParser
     #region DXF Data Struct Class
     public class CircleStruct
     {
+        public int circle { get; set; }
         public Vector3 center { get; set; }
         public double radius { get; set; }
     }
     public class LineStruct
     {
+        public int line { get; set; }
         public Vector3 startpoint { get; set; }
         public Vector3 endpoint { get; set; }
     }
     public class Polylines2DStruct
     {
+        public int polylines2D { get; set; }
         public double posX { get; set; }
         public double posY { get; set; }
     }
@@ -157,16 +160,22 @@ namespace DXFParser
         {
             Circle_Item1.Width = 0;
             Circle_Item2.Width = 0;
+            Circle_Item3.Width = 0;
             Circle_Item1.Header = "";
             Circle_Item2.Header = "";
+            Circle_Item3.Header = "";
             Line_Item1.Width = 0;
             Line_Item2.Width = 0;
+            Line_Item3.Width = 0;
             Line_Item1.Header = "";
             Line_Item2.Header = "";
+            Line_Item3.Header = "";
             Polylines2D_Item1.Width = 0;
             Polylines2D_Item2.Width = 0;
+            Polylines2D_Item3.Width = 0;
             Polylines2D_Item1.Header = "";
             Polylines2D_Item2.Header = "";
+            Polylines2D_Item3.Header = "";
         }
         #endregion
 
@@ -197,66 +206,22 @@ namespace DXFParser
                 case nameof(Read_DXF):
                     {
                         DxfDocument dxf = DxfDocument.Load(Open_Reading_DXF_Path.Text);
-                        #region
-                        ////讀取Polylines2D info
-                        //string filePath = @"output.txt";
-                        //using (StreamWriter writer = new StreamWriter(filePath))
-                        //{
-                        //    int num1 = 1;
-                        //    foreach (var polyline in dxf.Entities.Polylines2D)
-                        //    {
-                        //        writer.WriteLine($"Vector2[] points{num1} = new Vector2[]");
-                        //        writer.WriteLine($"{{");
-                        //        int num2 = 1;
-                        //        string temp = null;
-                        //        foreach (var vertex in polyline.Vertexes)
-                        //        {
-                        //            if (num2 == 1)
-                        //            {
-                        //                temp = $"     new Vector2({vertex.Position.X}, {vertex.Position.Y})";
-                        //                writer.WriteLine($"     new Vector2({vertex.Position.X}, {vertex.Position.Y}),");
-                        //            }
-                        //            else if (num2 == 8)
-                        //            {
-                        //                writer.WriteLine($"     new Vector2({vertex.Position.X}, {vertex.Position.Y}),");
-                        //                writer.WriteLine(temp);
-                        //            }
-                        //            else
-                        //            {
-                        //                writer.WriteLine($"     new Vector2({vertex.Position.X}, {vertex.Position.Y}),");
-                        //            }
-                        //            num2 += 1;
-                        //        }
-                        //        writer.WriteLine($"}};");
-                        //        writer.WriteLine("WD.CreatePolyline2D(doc, points" + num1.ToString() + ");");
-                        //        num1 += 1;
-                        //    }
-                        //}
-                        //Console.WriteLine("文本已寫入到文件：" + filePath);
-                        //int num = 0;
-                        //foreach (var polyline in dxf.Entities.Polylines2D)
-                        //{
-                        //    Console.WriteLine($"----------------------------------------");
-                        //    foreach (var vertex in polyline.Vertexes)
-                        //    {
-                        //        Console.WriteLine($"{vertex.Position.X}, {vertex.Position.Y}");
-                        //    }
-                        //    num += 1;
-                        //}
-                        //Console.WriteLine(num);
-                        #endregion
                         if ((bool)Circle.IsChecked)
                         {
                             circle = new ObservableCollection<CircleStruct>();
                             ListViewClearWidth();
-                            Circle_Item1.Header = "Center of Circle";
-                            Circle_Item2.Header = "Radius";
-                            Circle_Item1.Width = 300;
-                            Circle_Item2.Width = 250;
+                            Circle_Item1.Header = "Circle";
+                            Circle_Item2.Header = "Center of Circle";
+                            Circle_Item3.Header = "Radius";
+                            Circle_Item1.Width = 100;
+                            Circle_Item2.Width = 300;
+                            Circle_Item3.Width = 250;
+                            int num = 1;
                             foreach (var item in dxf.Entities.Circles)
                             {
                                 //circle.Add(new CircleStruct { center = new Vector3(20, 20, 0), radius = 15.0 });
-                                circle.Add(new CircleStruct { center = item.Center, radius = item.Radius });
+                                circle.Add(new CircleStruct { circle = num, center = item.Center, radius = item.Radius });
+                                num += 1;
                             }
                             DXFListView.ItemsSource = circle;
                             Logger.WriteLog("Find DXF Circle data!", LogLevel.General, richTextBoxGeneral);
@@ -265,13 +230,17 @@ namespace DXFParser
                         {
                             line = new ObservableCollection<LineStruct>();
                             ListViewClearWidth();
-                            Line_Item1.Header = "StartPoint";
-                            Line_Item2.Header = "EndPoint";
-                            Line_Item1.Width = 250;
+                            Line_Item1.Header = "Line";
+                            Line_Item2.Header = "StartPoint";
+                            Line_Item3.Header = "EndPoint";
+                            Line_Item1.Width = 100;
                             Line_Item2.Width = 250;
+                            Line_Item3.Width = 250;
+                            int num = 1;
                             foreach (var item in dxf.Entities.Lines)
                             {
-                                line.Add(new LineStruct { startpoint = item.StartPoint, endpoint = item.EndPoint });
+                                line.Add(new LineStruct { line = num, startpoint = item.StartPoint, endpoint = item.EndPoint });
+                                num += 1;
                             }
                             DXFListView.ItemsSource = line;
                             Logger.WriteLog("Find DXF Line data!", LogLevel.General, richTextBoxGeneral);
@@ -280,15 +249,19 @@ namespace DXFParser
                         {
                             polylines2D = new ObservableCollection<Polylines2DStruct>();
                             ListViewClearWidth();
-                            Polylines2D_Item1.Header = "Position X";
-                            Polylines2D_Item2.Header = "Position Y";
-                            Polylines2D_Item1.Width = 250;
+                            Polylines2D_Item1.Header = "Polylines2D";
+                            Polylines2D_Item2.Header = "Position X";
+                            Polylines2D_Item3.Header = "Position Y";
+                            Polylines2D_Item1.Width = 100;
                             Polylines2D_Item2.Width = 250;
+                            Polylines2D_Item3.Width = 250;
+                            int num = 1;
                             foreach (var polyline in dxf.Entities.Polylines2D)
                             {
                                 foreach (var item in polyline.Vertexes)
                                 {
-                                    polylines2D.Add(new Polylines2DStruct { posX = item.Position.X, posY = item.Position.Y });
+                                    polylines2D.Add(new Polylines2DStruct { polylines2D = num, posX = item.Position.X, posY = item.Position.Y });
+                                    num += 1;
                                 }
                             }
                             DXFListView.ItemsSource = polylines2D;
