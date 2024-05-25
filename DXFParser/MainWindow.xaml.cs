@@ -33,6 +33,7 @@ using Microsoft.Win32;
 using System.Collections.ObjectModel;
 using Xceed.Wpf.Toolkit.PropertyGrid.Attributes;
 using System.Windows.Markup;
+using Path = System.IO.Path;
 
 
 namespace DXFParser
@@ -201,6 +202,7 @@ namespace DXFParser
                 case nameof(Open_Reading_DXF):
                     {
                         OpenDXFFile(Open_Reading_DXF_Path);
+                        Logger.WriteLog("Open a reading DXF path!", LogLevel.General, richTextBoxGeneral);
                         break;
                     }
                 case nameof(Read_DXF):
@@ -268,18 +270,34 @@ namespace DXFParser
                             Logger.WriteLog("Find DXF Polylines2D data!", LogLevel.General, richTextBoxGeneral);
                         }
                         DataContext = this;
+                        Logger.WriteLog("Read the DXF data!", LogLevel.General, richTextBoxGeneral);
                         break;
                     }
                 case nameof(Clear_ListView):
                     {
                         DXFListView.ItemsSource = null;
                         ListViewClearWidth();
-                        Logger.WriteLog("Clear ListView data!", LogLevel.General, richTextBoxGeneral);
+                        Logger.WriteLog("Clear the ListView data!", LogLevel.General, richTextBoxGeneral);
                         break;
                     }
-                case nameof(Test):
+                case nameof(Export_CSV):
                     {
-                        DT.ExportCsv(DXFListView, @"E:\DIP Temp\Image Temp\1.csv");
+                        DT.CheckDir("Data Structure CSV");
+                        string csvname = "";
+                        if ((bool)Circle.IsChecked)
+                        {
+                            csvname = "Circle";
+                        }
+                        else if ((bool)Line.IsChecked)
+                        {
+                            csvname = "Line";
+                        }
+                        else if ((bool)Polylines2D.IsChecked)
+                        {
+                            csvname = "Polylines2D";
+                        }
+                        DT.ExportCsv(DXFListView, Path.Combine("Data Structure CSV", csvname + "_" + DateTime.Now.ToString("yyyyMMddHHmmss")+".csv"));
+                        Logger.WriteLog("Export a data structure csv file!", LogLevel.General, richTextBoxGeneral);
                         break;
                     }
             }

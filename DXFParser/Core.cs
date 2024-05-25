@@ -38,6 +38,14 @@ namespace DXFParser
 
     class DataTransformer
     {
+        public void CheckDir(string folder)
+        {
+            if (!Directory.Exists(folder))
+            {
+                Directory.CreateDirectory(folder);
+            }
+        }
+
         private string[] GetListViewHeader(ListView listView)
         {
             List<string> headers = new List<string>();
