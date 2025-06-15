@@ -1,14 +1,12 @@
-﻿using netDxf;
-using netDxf.Entities;
+﻿using netDxf.Entities;
+using netDxf;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Runtime.Remoting.Messaging;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
-using System.Windows.Markup;
 
 namespace DXFParser
 {
@@ -36,7 +34,7 @@ namespace DXFParser
 
     }
 
-    class DataTransformer
+    class DataHandler
     {
         public void CheckDir(string folder)
         {
@@ -117,8 +115,6 @@ namespace DXFParser
             }
         }
 
-        
+
     }
-
-
 }
