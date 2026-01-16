@@ -1,0 +1,38 @@
+[
+  {
+    "Models": [
+      {
+        "SerialNumbers": {
+          "Open_Writing_DXF_Path_val": "D:\\Chimingkuei\\repos\\DXFParser\\DXFParser\\bin\\x64\\Debug\\Test.dxf",
+          "Open_Reading_DXF_Path_val": "D:\\Chimingkuei\\repos\\DXFParser\\DXFParser\\bin\\x64\\Debug\\3225 HOLD框(紅框).dxf",
+          "Circle_val": "False",
+          "Line_val": "True",
+          "Polylines2D_val": "False",
+          "Polyline2D_PointGroup_val": "3"
+        }
+      },
+      {
+        "SerialNumbers": {
+          "Open_Writing_DXF_Path_val": "",
+          "Open_Reading_DXF_Path_val": ""
+        }
+      }
+    ]
+  },
+  {
+    "Models": [
+      {
+        "SerialNumbers": {
+          "Open_Writing_DXF_Path_val": "",
+          "Open_Reading_DXF_Path_val": ""
+        }
+      },
+      {
+        "SerialNumbers": {
+          "Open_Writing_DXF_Path_val": "",
+          "Open_Reading_DXF_Path_val": ""
+        }
+      }
+    ]
+  }
+]
